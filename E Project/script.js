@@ -1,0 +1,515 @@
+document.addEventListener("DOMContentLoaded", function () {
+
+  const navbar = document.getElementById("mainNavbar");
+
+  function handleNavbarScroll() {
+    if (window.scrollY > 40) {
+      navbar.classList.add("scrolled");
+    } else {
+      navbar.classList.remove("scrolled");
+    }
+  }
+
+  handleNavbarScroll();
+  window.addEventListener("scroll", handleNavbarScroll);
+
+
+  
+  const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
+  const mobileMenu = document.getElementById("navMenu");
+
+  navLinks.forEach(function (link) {
+    link.addEventListener("click", function () {
+      navLinks.forEach(function (l) {
+        l.classList.remove("active");
+      });
+      link.classList.add("active");
+
+      if (mobileMenu.classList.contains("show")) {
+        const bsCollapse = bootstrap.Collapse.getOrCreateInstance(mobileMenu);
+        bsCollapse.hide();
+      }
+    });
+  });
+
+  const sectionsWithIds = document.querySelectorAll("section[id], header[id]");
+
+  function highlightNavOnScroll() {
+    let currentSectionId = "home"; 
+    const scrollPosition = window.scrollY + 120; 
+
+    sectionsWithIds.forEach(function (section) {
+      if (scrollPosition >= section.offsetTop) {
+        currentSectionId = section.getAttribute("id");
+      }
+    });
+
+    navLinks.forEach(function (link) {
+      const href = link.getAttribute("href");
+      if (href === "#" + currentSectionId) {
+        navLinks.forEach(function (l) { l.classList.remove("active"); });
+        link.classList.add("active");
+      }
+    });
+  }
+
+  window.addEventListener("scroll", highlightNavOnScroll);
+
+
+  const revealElements = document.querySelectorAll(".reveal");
+
+  const revealObserver = new IntersectionObserver(
+    function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  revealElements.forEach(function (el) {
+    revealObserver.observe(el);
+  });
+
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function initParallaxSection(sectionSelector, layerClassName) {
+    const section = document.querySelector(sectionSelector);
+    if (!section || prefersReducedMotion) {
+      return;
+    }
+
+    const MAX_OFFSET = 200;
+
+    const bgLayer = document.createElement("div");
+    bgLayer.className = layerClassName;
+    section.insertBefore(bgLayer, section.firstChild);
+
+    function sizeBgLayer() {
+      const sectionHeight = section.offsetHeight;
+      bgLayer.style.height = sectionHeight + MAX_OFFSET * 2 + "px";
+      bgLayer.style.top = -MAX_OFFSET + "px";
+    }
+
+    let ticking = false;
+
+    function updateParallax() {
+      const rect = section.getBoundingClientRect();
+      const viewportCenter = window.innerHeight / 2;
+      const distanceFromCenter = rect.top + rect.height / 2 - viewportCenter;
+      const offset = Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, distanceFromCenter * 0.7));
+      bgLayer.style.transform = "translateY(" + offset + "px)";
+      ticking = false;
+    }
+
+    window.addEventListener("scroll", function () {
+      if (!ticking) {
+        window.requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    });
+
+    window.addEventListener("resize", function () {
+      sizeBgLayer();
+      updateParallax();
+    });
+
+    sizeBgLayer();
+    updateParallax();
+  }
+
+  initParallaxSection(".home-parallax-wrapper", "home-parallax-bg");
+
+
+  const destinationData = {
+    alps: {
+      name: "The Alps",
+      location: "Europe",
+      image: "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?q=80&w=1200&auto=format&fit=crop",
+      description: "Iconic snowy peaks, charming alpine villages and some of the best ski resorts in the world make the Alps a year round destination for mountain lovers.",
+      activities: "Skiing, Hiking, Climbing",
+      bestTime: "Summer and Winter",
+      link: "destination.html#alps"
+    },
+    himalayas: {
+      name: "Himalayas",
+      location: "Asia",
+      image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1200&auto=format&fit=crop",
+      description: "Home to the world's highest peaks, the Himalayas offer legendary trekking trails and breathtaking views that draw adventurers from every corner of the globe.",
+      activities: "Trekking, Hiking, Mountaineering",
+      bestTime: "Spring and Autumn",
+      link: "destination.html#himalayas"
+    },
+    karakoram: {
+      name: "Karakoram",
+      location: "Pakistan / Asia",
+      image: "https://images.unsplash.com/photo-1522163182402-834f871fd851?q=80&w=1200&auto=format&fit=crop",
+      description: "Dramatic granite giants including K2 make the Karakoram range one of the most challenging and rewarding destinations for the boldest explorers.",
+      activities: "Trekking, Climbing, Photography",
+      bestTime: "Summer",
+      link: "destination.html#karakoram"
+    },
+    rockies: {
+      name: "Rockies",
+      location: "North America",
+      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200&auto=format&fit=crop",
+      description: "Vast wilderness, abundant wildlife and endless trails stretch across the Rockies, offering unforgettable adventures throughout every season.",
+      activities: "Hiking, Camping, Skiing",
+      bestTime: "Summer and Winter",
+      link: "destination.html#rockies"
+    },
+    hunza: {
+      name: "Hunza Valley",
+      location: "Gilgit-Baltistan, Pakistan",
+      image: "https://images.unsplash.com/photo-1514558427911-8e293bebf18c?q=80&w=1200&auto=format&fit=crop",
+      description: "Snow peaks, apricot orchards and centuries of Silk Road history make Hunza Valley one of Pakistan's most breathtaking destinations.",
+      activities: "Hiking, Sightseeing, Photography",
+      bestTime: "April to October",
+      link: "destination.html#hunza"
+    },
+    skardu: {
+      name: "Skardu and Deosai",
+      location: "Gilgit-Baltistan, Pakistan",
+      image: "https://images.unsplash.com/photo-1679951124125-50cc4029d727?q=80&w=1200&auto=format&fit=crop",
+      description: "Gateway to K2 and the Karakoram, with turquoise lakes and the vast Deosai Plains, one of the highest plateaus in the world.",
+      activities: "Trekking, Jeep Safaris, Wildlife Watching",
+      bestTime: "May to September",
+      link: "destination.html#skardu"
+    },
+    fairymeadows: {
+      name: "Fairy Meadows",
+      location: "Gilgit-Baltistan, Pakistan",
+      image: "https://images.unsplash.com/photo-1664872759149-b7605ca5a3a7?q=80&w=1200&auto=format&fit=crop",
+      description: "One of the closest and most breathtaking views of Nanga Parbat, the ninth highest peak on Earth, reached through lush alpine meadows.",
+      activities: "Trekking, Camping, Photography",
+      bestTime: "June to September",
+      link: "destination.html#fairymeadows"
+    }
+  };
+
+  const destinationCards = document.querySelectorAll(".destination-card");
+  const destinationModalEl = document.getElementById("destinationModal");
+
+  if (destinationModalEl) {
+    const destinationModal = new bootstrap.Modal(destinationModalEl);
+    const modalDestinationImage = document.getElementById("modalDestinationImage");
+    const modalDestinationName = document.getElementById("modalDestinationName");
+    const modalDestinationLocation = document.getElementById("modalDestinationLocation");
+    const modalDestinationDesc = document.getElementById("modalDestinationDesc");
+    const modalDestinationActivities = document.getElementById("modalDestinationActivities");
+    const modalDestinationBestTime = document.getElementById("modalDestinationBestTime");
+    const modalExploreBtn = document.getElementById("modalExploreBtn");
+
+    destinationCards.forEach(function (card) {
+      card.addEventListener("click", function () {
+        const key = card.getAttribute("data-destination");
+        const data = destinationData[key];
+
+        if (!data) {
+          return;
+        }
+
+        modalDestinationImage.src = data.image;
+        modalDestinationImage.alt = data.name;
+        modalDestinationName.textContent = data.name;
+        modalDestinationLocation.textContent = data.location;
+        modalDestinationDesc.textContent = data.description;
+        modalDestinationActivities.textContent = data.activities;
+        modalDestinationBestTime.textContent = data.bestTime;
+        modalExploreBtn.setAttribute("href", data.link);
+
+        destinationModal.show();
+      });
+    });
+  }
+
+
+  const compassFace = document.getElementById("compassFace");
+  const compassNeedle = document.getElementById("compassNeedle");
+  const compassHint = document.getElementById("compassHint");
+  const enableDeviceCompassBtn = document.getElementById("enableDeviceCompass");
+  const compassDestinationSelect = document.getElementById("compassDestinationSelect");
+
+  if (compassFace && compassNeedle) {
+    let deviceCompassActive = false;
+    let lastDeviceHeading = null;
+    let userCoords = null;
+
+    const compassDestinations = {
+      himalayas: { name: "the Himalayas", lat: 27.98, lon: 86.92 },
+      karakoram: { name: "the Karakoram", lat: 35.88, lon: 76.51 },
+      alps: { name: "the Alps", lat: 45.83, lon: 6.87 },
+      rockies: { name: "the Rockies", lat: 39.0, lon: -105.5 },
+      andes: { name: "the Andes", lat: -16.5, lon: -68.15 },
+      atlas: { name: "the Atlas Mountains", lat: 31.06, lon: -7.92 },
+      hunza: { name: "Hunza Valley", lat: 36.32, lon: 74.65 },
+      skardu: { name: "Skardu and Deosai", lat: 35.3, lon: 75.63 },
+      fairymeadows: { name: "Fairy Meadows", lat: 35.38, lon: 74.58 },
+      swat: { name: "Swat Valley", lat: 35.2, lon: 72.42 },
+      naran: { name: "Naran Kaghan", lat: 34.91, lon: 73.65 },
+      chitral: { name: "Chitral and Kalash", lat: 35.85, lon: 71.79 },
+      annapurna: { name: "Annapurna", lat: 28.53, lon: 83.82 },
+      fuji: { name: "Mount Fuji", lat: 35.36, lon: 138.73 },
+      dolomites: { name: "the Dolomites", lat: 46.54, lon: 12.14 },
+      pyrenees: { name: "the Pyrenees", lat: 42.77, lon: -0.14 },
+      sierranevada: { name: "Sierra Nevada", lat: 37.75, lon: -119.5 },
+      banff: { name: "the Canadian Rockies", lat: 51.18, lon: -115.57 },
+      patagonia: { name: "Patagonia", lat: -49.33, lon: -72.88 },
+      aconcagua: { name: "Aconcagua", lat: -32.65, lon: -70.01 }
+    };
+
+    let selectedDestinationKey = compassDestinationSelect
+      ? compassDestinationSelect.value
+      : "himalayas";
+
+    function toRad(deg) {
+      return (deg * Math.PI) / 180;
+    }
+
+    function toDeg(rad) {
+      return (rad * 180) / Math.PI;
+    }
+
+    function setNeedleRotation(angleDegrees) {
+      compassNeedle.style.transform = "rotate(" + angleDegrees + "deg)";
+    }
+
+    function computeBearing(lat1, lon1, lat2, lon2) {
+      const phi1 = toRad(lat1);
+      const phi2 = toRad(lat2);
+      const deltaLambda = toRad(lon2 - lon1);
+
+      const y = Math.sin(deltaLambda) * Math.cos(phi2);
+      const x =
+        Math.cos(phi1) * Math.sin(phi2) -
+        Math.sin(phi1) * Math.cos(phi2) * Math.cos(deltaLambda);
+
+      const theta = Math.atan2(y, x);
+      return (toDeg(theta) + 360) % 360;
+    }
+
+    function updateCompassToDestination() {
+      if (!userCoords) {
+        return;
+      }
+
+      const dest = compassDestinations[selectedDestinationKey];
+      if (!dest) {
+        return;
+      }
+
+      const bearing = computeBearing(userCoords.lat, userCoords.lon, dest.lat, dest.lon);
+      let displayAngle = bearing;
+
+      if (deviceCompassActive && typeof lastDeviceHeading === "number") {
+        displayAngle = bearing - lastDeviceHeading;
+        compassHint.textContent = "Pointing toward " + dest.name;
+      } else {
+        compassHint.textContent = "Pointing toward " + dest.name + " (screen up = north)";
+      }
+
+      setNeedleRotation(displayAngle);
+    }
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function (position) {
+          userCoords = {
+            lat: position.coords.latitude,
+            lon: position.coords.longitude
+          };
+          updateCompassToDestination();
+        },
+        function () {
+          compassHint.textContent = "Enable location access to point toward a destination";
+        },
+        { enableHighAccuracy: false, timeout: 8000 }
+      );
+    } else {
+      compassHint.textContent = "Location is not supported on this browser";
+    }
+
+    if (compassDestinationSelect) {
+      compassDestinationSelect.addEventListener("change", function () {
+        selectedDestinationKey = compassDestinationSelect.value;
+        updateCompassToDestination();
+      });
+    }
+
+    function handleOrientation(event) {
+      let heading = null;
+
+      if (typeof event.webkitCompassHeading === "number") {
+        heading = event.webkitCompassHeading;
+      } else if (typeof event.alpha === "number") {
+        heading = 360 - event.alpha;
+      }
+
+      if (heading === null) {
+        return;
+      }
+
+      lastDeviceHeading = heading;
+      updateCompassToDestination();
+    }
+
+    function tryAutoStartDeviceCompass() {
+      if (
+        typeof DeviceOrientationEvent !== "undefined" &&
+        typeof DeviceOrientationEvent.requestPermission !== "function" &&
+        window.DeviceOrientationEvent
+      ) {
+        deviceCompassActive = true;
+        window.addEventListener("deviceorientationabsolute", handleOrientation);
+        window.addEventListener("deviceorientation", handleOrientation);
+        if (enableDeviceCompassBtn) {
+          enableDeviceCompassBtn.style.display = "none";
+        }
+      }
+    }
+
+    tryAutoStartDeviceCompass();
+
+    if (enableDeviceCompassBtn) {
+      enableDeviceCompassBtn.addEventListener("click", function () {
+        if (
+          typeof DeviceOrientationEvent !== "undefined" &&
+          typeof DeviceOrientationEvent.requestPermission === "function"
+        ) {
+          DeviceOrientationEvent.requestPermission()
+            .then(function (response) {
+              if (response === "granted") {
+                deviceCompassActive = true;
+                window.addEventListener("deviceorientation", handleOrientation);
+                enableDeviceCompassBtn.style.display = "none";
+              } else {
+                compassHint.textContent = "Device access was not granted";
+              }
+            })
+            .catch(function () {
+              compassHint.textContent = "Device compass unavailable";
+            });
+        } else if (window.DeviceOrientationEvent) {
+          deviceCompassActive = true;
+          window.addEventListener("deviceorientationabsolute", handleOrientation);
+          window.addEventListener("deviceorientation", handleOrientation);
+          enableDeviceCompassBtn.style.display = "none";
+        } else {
+          compassHint.textContent = "Not supported on this browser";
+        }
+      });
+    }
+  }
+
+
+  const statNumbers = document.querySelectorAll(".stat-number");
+  const statsSection = document.getElementById("stats");
+  let countersStarted = false;
+
+  function animateCounter(el) {
+    const target = parseInt(el.getAttribute("data-target"), 10);
+    const duration = 1800;
+    const startTime = performance.now();
+
+    function updateCount(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1); 
+      const currentValue = Math.floor(progress * target);
+
+      el.textContent = currentValue.toLocaleString() + (progress >= 1 ? "+" : "");
+
+      if (progress < 1) {
+        requestAnimationFrame(updateCount);
+      } else {
+        el.textContent = target.toLocaleString() + "+";
+      }
+    }
+
+    requestAnimationFrame(updateCount);
+  }
+
+  const statsObserver = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && !countersStarted) {
+          countersStarted = true; 
+          statNumbers.forEach(function (num) {
+            animateCounter(num);
+          });
+        }
+      });
+    },
+    { threshold: 0.4 }
+  );
+
+  if (statsSection) {
+    statsObserver.observe(statsSection);
+  }
+
+
+  const backToTopBtn = document.getElementById("backToTop");
+
+  window.addEventListener("scroll", function () {
+    if (window.scrollY > 400) {
+      backToTopBtn.classList.add("show");
+    } else {
+      backToTopBtn.classList.remove("show");
+    }
+  });
+
+  backToTopBtn.addEventListener("click", function () {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+
+
+  const allButtons = document.querySelectorAll(".btn");
+
+  allButtons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      btn.classList.add("btn-pressed");
+      setTimeout(function () {
+        btn.classList.remove("btn-pressed");
+      }, 150);
+    });
+  });
+
+
+  const newsletterForm = document.getElementById("newsletterForm");
+  const newsletterEmail = document.getElementById("newsletterEmail");
+  const newsletterMsg = document.getElementById("newsletterMsg");
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  newsletterForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const emailValue = newsletterEmail.value.trim();
+
+    if (emailValue === "") {
+      showNewsletterMessage("Please enter your email address.", "error");
+    } else if (!emailPattern.test(emailValue)) {
+      showNewsletterMessage("Please enter a valid email address.", "error");
+    } else {
+      showNewsletterMessage("Thank you for subscribing!", "success");
+      newsletterForm.reset();
+    }
+  });
+
+  function showNewsletterMessage(text, type) {
+    newsletterMsg.textContent = text;
+    newsletterMsg.classList.remove("text-success-msg", "text-error-msg");
+    newsletterMsg.classList.add(type === "success" ? "text-success-msg" : "text-error-msg");
+  }
+
+
+  const yearSpan = document.getElementById("currentYear");
+  yearSpan.textContent = new Date().getFullYear();
+
+});

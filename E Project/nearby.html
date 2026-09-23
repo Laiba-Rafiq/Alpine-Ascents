@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explore Nearby - Alpine Astine</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="nearby.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top" id="mainNavbar">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <img src="assets/logo.png" alt="Alpine Astine" class="navbar-logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+      aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="history.html">History</a></li>
+        <li class="nav-item"><a class="nav-link" href="destination.html">Destinations</a></li>
+        <li class="nav-item"><a class="nav-link" href="activities.html">Activities</a></li>
+        <li class="nav-item"><a class="nav-link" href="safety.html">Safety</a></li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link active" href="nearby.html">Explore Nearby</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        <a class="nav-link search-icon" href="destination.html#findaplace" aria-label="Search"><i class="bi bi-search"></i></a>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="nearby-hero" id="explore">
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <p class="eyebrow-script">Explore Nearby</p>
+    <div class="small-divider"><i class="bi bi-triangle-fill"></i></div>
+    <h1 class="hero-heading">Discover Amazing Places <span class="text-gold">Around You</span></h1>
+    <p class="hero-text">Find resorts, hotels, restaurants and adventure spots near any mountain destination.</p>
+  </div>
+</header>
+
+<section class="nearby-controls py-4">
+  <div class="container">
+
+    <div class="location-bar reveal">
+      <div class="location-search-wrap">
+        <i class="bi bi-geo-alt"></i>
+        <input type="text" id="locationSearchInput" class="form-control" placeholder="Search a location (e.g. Skardu, Murree)" autocomplete="off">
+        <div class="location-suggestions d-none" id="locationSuggestions"></div>
+      </div>
+      <button type="button" class="btn btn-gold use-location-btn" id="useMyLocationBtn">
+        <i class="bi bi-crosshair"></i> Use My Location
+      </button>
+    </div>
+
+    <p class="current-location-label" id="currentLocationLabel">
+      <i class="bi bi-pin-map-fill"></i> Showing places near <strong id="currentLocationName">Skardu, Pakistan</strong>
+    </p>
+
+    <div class="category-tabs" id="categoryTabs">
+      <button type="button" class="filter-btn active" data-category="resorts"><i class="bi bi-building"></i> Resorts</button>
+      <button type="button" class="filter-btn" data-category="hotels"><i class="bi bi-building-fill"></i> Hotels</button>
+      <button type="button" class="filter-btn" data-category="staycations"><i class="bi bi-house-heart"></i> Staycations</button>
+      <button type="button" class="filter-btn" data-category="restaurants"><i class="bi bi-cup-hot"></i> Restaurants</button>
+      <button type="button" class="filter-btn" data-category="cafes"><i class="bi bi-cup-straw"></i> Cafés</button>
+      <button type="button" class="filter-btn" data-category="attractions"><i class="bi bi-camera"></i> Attractions</button>
+      <button type="button" class="filter-btn" data-category="adventure"><i class="bi bi-compass"></i> Adventure</button>
+      <button type="button" class="filter-btn" data-category="petrolpumps"><i class="bi bi-fuel-pump"></i> Petrol Pumps</button>
+    </div>
+
+    <div class="radius-row">
+      <span class="radius-label">Search radius:</span>
+      <div class="radius-buttons" id="radiusButtons">
+        <button type="button" class="radius-btn" data-radius="5000">5 km</button>
+        <button type="button" class="radius-btn active" data-radius="10000">10 km</button>
+        <button type="button" class="radius-btn" data-radius="25000">25 km</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="nearby-results py-4">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-lg-7">
+        <div id="nearbyMap" class="nearby-map reveal"></div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="results-panel reveal">
+          <div class="results-header">
+            <h5 id="resultsCategoryTitle">Nearby Resorts</h5>
+            <span id="resultsCount" class="results-count"></span>
+          </div>
+
+          <div id="resultsLoading" class="results-state d-none">
+            <div class="spinner-border text-warning" role="status"></div>
+            <p>Loading nearby places...</p>
+          </div>
+
+          <div id="resultsEmpty" class="results-state d-none">
+            <i class="bi bi-emoji-frown"></i>
+            <p id="resultsEmptyText">No nearby places found.</p>
+          </div>
+
+          <div id="resultsError" class="results-state d-none">
+            <i class="bi bi-wifi-off"></i>
+            <p>Unable to load nearby places right now. Please try again.</p>
+          </div>
+
+          <div class="results-list" id="resultsList"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-overlay"></div>
+  <div class="container cta-content text-center reveal">
+    <h2 class="cta-heading">Every Mountain Has More To Offer</h2>
+    <p class="cta-text">From cozy cafés to thrilling adventures, discover what's around every destination.</p>
+    <a href="destination.html" class="btn btn-gold btn-hero">Explore Destinations</a>
+  </div>
+</section>
+
+<footer class="site-footer" id="footer">
+  <div class="container py-5">
+    <div class="row g-4">
+
+      <div class="col-lg-4 col-md-6">
+        <a class="footer-brand" href="index.html">
+          <img src="assets/logo.png" alt="Alpine Astine" class="footer-logo">
+        </a>
+        <p class="footer-text mt-3">
+          Exploring mountains, creating memories and inspiring adventures for
+          travelers who seek the world's most breathtaking places.
+        </p>
+        <div class="social-icons mt-3">
+          <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+          <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-6">
+        <h5 class="footer-title">Quick Links</h5>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="history.html">History</a></li>
+          <li><a href="destination.html">Destinations</a></li>
+          <li><a href="activities.html">Activities</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-6">
+        <h5 class="footer-title">Useful Links</h5>
+        <ul class="footer-links">
+          <li><a href="safety.html">Safety</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="nearby.html">Explore Nearby</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <h5 class="footer-title">Newsletter</h5>
+        <p class="footer-text">
+          Subscribe to get travel tips, exclusive offers and adventure inspiration.
+        </p>
+        <form id="newsletterForm" class="newsletter-form" novalidate>
+          <div class="input-group">
+            <input type="email" id="newsletterEmail" class="form-control"
+              placeholder="Enter your email" aria-label="Email address" required>
+            <button class="btn btn-gold" type="submit">Subscribe</button>
+          </div>
+          <small id="newsletterMsg" class="d-block mt-2"></small>
+        </form>
+      </div>
+
+    </div>
+
+    <hr class="footer-divider">
+
+    <p class="text-center copyright mb-0">
+      &copy; <span id="currentYear"></span> Alpine Astine. All Rights Reserved.
+    </p>
+  </div>
+</footer>
+
+<button id="backToTop" aria-label="Back to top">
+  <i class="bi bi-chevron-up"></i>
+</button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="nearby.js"></script>
+  <script src="sound-widget.js"></script>
+</body>
+</html>
