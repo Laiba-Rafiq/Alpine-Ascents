@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Destinations - Alpine Astine</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+<link rel="stylesheet" href="destination.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top" id="mainNavbar">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <img src="assets/logo.png" alt="Alpine Astine" class="navbar-logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+      aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="history.html">History</a></li>
+        <li class="nav-item"><a class="nav-link active" href="destinations.html">Destinations</a></li>
+        <li class="nav-item"><a class="nav-link" href="activities.html">Activities</a></li>
+        <li class="nav-item"><a class="nav-link" href="safety.html">Safety</a></li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="nearby.html">Explore Nearby</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        <li class="nav-item">
+          <a class="nav-link search-icon" href="destination.html#findaplace" aria-label="Search"><i class="bi bi-search"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="dest-hero">
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <div class="row">
+      <div class="col-lg-7 fade-in-up">
+        <p class="eyebrow-script">Explore The World</p>
+        <div class="small-divider"><i class="bi bi-triangle-fill"></i></div>
+        <h1 class="hero-heading">Discover Amazing <span class="text-gold">Destinations</span></h1>
+        <p class="hero-text">
+          From snow covered peaks to peaceful valleys, discover some of the world's most beautiful mountain destinations.
+        </p>
+        <a href="#destinationsList" class="btn btn-gold btn-hero">
+          <i class="bi bi-compass"></i> Explore Now
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="search-section py-5" id="findaplace">
+  <div class="container py-4">
+    <div class="text-center mb-4 reveal">
+      <p class="eyebrow justify-content-center">Find A Place</p>
+      <h2 class="section-heading">Search Your Destination</h2>
+    </div>
+
+    <div class="search-box reveal">
+      <div class="search-input-wrap">
+        <i class="bi bi-search"></i>
+        <input type="text" id="searchInput" class="form-control" placeholder="Search mountains or regions...">
+      </div>
+
+      <div class="filter-buttons" id="filterButtons">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="Pakistan">Pakistan</button>
+        <button class="filter-btn" data-filter="Asia">Asia</button>
+        <button class="filter-btn" data-filter="Europe">Europe</button>
+        <button class="filter-btn" data-filter="North America">North America</button>
+        <button class="filter-btn" data-filter="South America">South America</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="featured-destinations py-5" id="destinationsList">
+  <div class="container py-4">
+    <div class="text-center mb-5 reveal">
+      <p class="eyebrow justify-content-center">Top Picks</p>
+      <h2 class="section-heading">Featured Mountain Destinations</h2>
+    </div>
+
+    <div class="row g-4" id="destinationCards">
+
+      <div class="col-sm-6 col-lg-4 dest-card-col reveal" data-name="Himalayas" data-region="Asia">
+        <div class="destination-card">
+          <div class="destination-img-wrap">
+            <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=800&auto=format&fit=crop" alt="Himalayas">
+          </div>
+          <div class="destination-info">
+            <h5>Himalayas</h5>
+            <p class="destination-location"><i class="bi bi-geo-alt"></i> Asia</p>
+            <p>Home to some of the highest mountains in the world, offering breathtaking views and unforgettable adventures.</p>
+            <button class="btn btn-navy btn-explore" data-id="himalayas">
+              Explore More <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 dest-card-col reveal" data-name="Karakoram" data-region="Pakistan">
+        <div class="destination-card">
+          <div class="destination-img-wrap">
+            <img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?q=80&w=800&auto=format&fit=crop" alt="Karakoram">
+          </div>
+          <div class="destination-info">
+            <h5>Karakoram</h5>
+            <p class="destination-location"><i class="bi bi-geo-alt"></i> Pakistan, Asia</p>
+            <p>Known for dramatic peaks, glaciers and some of the world's most challenging mountain routes.</p>
+            <button class="btn btn-navy btn-explore" data-id="karakoram">
+              Explore More <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 dest-card-col reveal" data-name="Alps" data-region="Europe">
+        <div class="destination-card">
+          <div class="destination-img-wrap">
+            <img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?q=80&w=800&auto=format&fit=crop" alt="Alps">
+          </div>
+          <div class="destination-info">
+            <h5>Alps</h5>
+            <p class="destination-location"><i class="bi bi-geo-alt"></i> Europe</p>
+            <p>Famous for beautiful valleys, snowy peaks, villages and exciting winter adventures.</p>
+            <button class="btn btn-navy btn-explore" data-id="alps">
+              Explore More <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 dest-card-col reveal" data-name="Rocky Mountains" data-region="North America">
+        <div class="destination-card">
+          <div class="destination-img-wrap">
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800&auto=format&fit=crop" alt="Rocky Mountains">
+          </div>
+          <div class="destination-info">
+            <h5>Rocky Mountains</h5>
+            <p class="destination-location"><i class="bi bi-geo-alt"></i> North America</p>
+            <p>A spectacular region filled with high peaks, forests, lakes and incredible wildlife.</p>
+            <button class="btn btn-navy btn-explore" data-id="rockies">
+              Explore More <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 dest-card-col reveal" data-name="Andes" data-region="South America">
+        <div class="destination-card">
+          <div class="destination-img-wrap">
+            <img src="https://images.unsplash.com/photo-1526392060635-9d6019884377?q=80&w=800&auto=format&fit=crop" alt="Andes">
+          </div>
+          <div class="destination-info">
+            <h5>Andes</h5>
+            <p class="destination-location"><i class="bi bi-geo-alt"></i> South America</p>
+            <p>The world's longest continental mountain range, rich in natural beauty and unique landscapes.</p>
+            <button class="btn btn-navy btn-explore" data-id="andes">
+              Explore More <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 dest-card-col reveal" data-name="Atlas Mountains" data-region="Africa">
+        <div class="destination-card">
+          <div class="destination-img-wrap">
+            <img src="https://images.unsplash.com/photo-1597662786834-8eea85ad4841?q=80&w=800&auto=format&fit=crop" alt="Atlas Mountains">
+          </div>
+          <div class="destination-info">
+            <h5>Atlas Mountains</h5>
+            <p class="destination-location"><i class="bi bi-geo-alt"></i> Africa</p>
+            <p>A beautiful mountain region known for traditional villages, valleys and scenic landscapes.</p>
+            <button class="btn btn-navy btn-explore" data-id="atlas">
+              Explore More <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 dest-card-col reveal" data-name="Hunza Valley" data-region="Pakistan">
+        <div class="destination-card">
+          <div class="destination-img-wrap">
+            <img src="https://images.unsplash.com/photo-1514558427911-8e293bebf18c?q=80&w=800&auto=format&fit=crop" alt="Hunza Valley Pakistan">
+          </div>
+          <div class="destination-info">
+            <h5>Hunza Valley</h5>
+            <p class="destination-location"><i class="bi bi-geo-alt"></i> Gilgit-Baltistan, Pakistan</p>
+            <p>A breathtaking valley surrounded by Rakaposhi and the Karakoram, famous for its apricot orchards and old forts.</p>
+            <button class="btn btn-navy btn-explore" data-id="hunza">
+              Explore More <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 dest-card-col reveal" data-name="Skardu and Deosai" data-region="Pakistan">
+        <div class="destination-card">
+          <div class="destination-img-wrap">
+            <img src="https://images.unsplash.com/photo-1679951124125-50cc4029d727?q=80&w=800&auto=format&fit=crop" alt="Skardu and Deosai Plains">
+          </div>
+          <div class="destination-info">
+            <h5>Skardu and Deosai</h5>
+            <p class="destination-location"><i class="bi bi-geo-alt"></i> Gilgit-Baltistan, Pakistan</p>
+            <p>Gateway to the world's highest peaks, with turquoise lakes and the vast Deosai Plains nearby.</p>
+            <button class="btn btn-navy btn-explore" data-id="skardu">
+              Explore More <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 dest-card-col reveal" data-name="Fairy Meadows" data-region="Pakistan">
+        <div class="destination-card">
+          <div class="destination-img-wrap">
+            <img src="https://images.unsplash.com/photo-1664872759149-b7605ca5a3a7?q=80&w=800&auto=format&fit=crop" alt="Fairy Meadows Nanga Parbat">
+          </div>
+          <div class="destination-info">
+            <h5>Fairy Meadows</h5>
+            <p class="destination-location"><i class="bi bi-geo-alt"></i> Gilgit-Baltistan, Pakistan</p>
+            <p>A lush green base camp offering one of the closest and most stunning views of Nanga Parbat.</p>
+            <button class="btn btn-navy btn-explore" data-id="fairymeadows">
+              Explore More <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 dest-card-col reveal" data-name="Swat Valley" data-region="Pakistan">
+        <div class="destination-card">
+          <div class="destination-img-wrap">
+            <img src="https://images.unsplash.com/photo-1624087267589-41ea77e28b1a?q=80&w=800&auto=format&fit=crop" alt="Swat Valley Pakistan">
+          </div>
+          <div class="destination-info">
+            <h5>Swat Valley</h5>
+            <p class="destination-location"><i class="bi bi-geo-alt"></i> Khyber Pakhtunkhwa, Pakistan</p>
+            <p>Often called the Switzerland of Pakistan, known for green valleys, rivers and cool hill stations.</p>
+            <button class="btn btn-navy btn-explore" data-id="swat">
+              Explore More <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 dest-card-col reveal" data-name="Naran Kaghan" data-region="Pakistan">
+        <div class="destination-card">
+          <div class="destination-img-wrap">
+            <img src="https://images.unsplash.com/photo-1626685516371-a0ee93a0f370?q=80&w=800&auto=format&fit=crop" alt="Naran Kaghan Valley">
+          </div>
+          <div class="destination-info">
+            <h5>Naran Kaghan</h5>
+            <p class="destination-location"><i class="bi bi-geo-alt"></i> Khyber Pakhtunkhwa, Pakistan</p>
+            <p>Home to the iconic Saif ul Malook Lake, surrounded by pine forests and snow capped peaks.</p>
+            <button class="btn btn-navy btn-explore" data-id="naran">
+              Explore More <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 dest-card-col reveal" data-name="Chitral and Kalash" data-region="Pakistan">
+        <div class="destination-card">
+          <div class="destination-img-wrap">
+            <img src="https://images.unsplash.com/photo-1667922210719-566cbfec2b11?q=80&w=800&auto=format&fit=crop" alt="Chitral and Kalash Valleys">
+          </div>
+          <div class="destination-info">
+            <h5>Chitral and Kalash</h5>
+            <p class="destination-location"><i class="bi bi-geo-alt"></i> Khyber Pakhtunkhwa, Pakistan</p>
+            <p>Remote valleys in the Hindu Kush, home to the unique Kalash people and their distinct culture.</p>
+            <button class="btn btn-navy btn-explore" data-id="chitral">
+              Explore More <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 dest-card-col reveal" data-name="Annapurna" data-region="Asia">
+        <div class="destination-card">
+          <div class="destination-img-wrap">
+            <img src="https://images.unsplash.com/photo-1485470733090-0aae1788d5af?q=80&w=800&auto=format&fit=crop" alt="Annapurna Nepal">
+          </div>
+          <div class="destination-info">
+            <h5>Annapurna</h5>
+            <p class="destination-location"><i class="bi bi-geo-alt"></i> Nepal</p>
+            <p>One of the most famous trekking regions on Earth, home to the Annapurna Circuit and Base Camp trails.</p>
+            <button class="btn btn-navy btn-explore" data-id="annapurna">
+              Explore More <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 dest-card-col reveal" data-name="Mount Fuji" data-region="Asia">
+        <div class="destination-card">
+          <div class="destination-img-wrap">
+            <img src="https://images.unsplash.com/photo-1528884089-4582fe06c516?q=80&w=800&auto=format&fit=crop" alt="Mount Fuji Japan">
+          </div>
+          <div class="destination-info">
+            <h5>Mount Fuji</h5>
+            <p class="destination-location"><i class="bi bi-geo-alt"></i> Japan</p>
+            <p>Japan's tallest peak and most iconic symbol, an active volcano surrounded by lakes and cherry blossoms.</p>
+            <button class="btn btn-navy btn-explore" data-id="fuji">
+              Explore More <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 dest-card-col reveal" data-name="Dolomites" data-region="Europe">
+        <div class="destination-card">
+          <div class="destination-img-wrap">
+            <img src="https://images.unsplash.com/photo-1694630515448-344264b30507?q=80&w=800&auto=format&fit=crop" alt="Dolomites Italy">
+          </div>
+          <div class="destination-info">
+            <h5>Dolomites</h5>
+            <p class="destination-location"><i class="bi bi-geo-alt"></i> Italy</p>
+            <p>Dramatic limestone peaks and alpine meadows recognized as a UNESCO World Heritage Site.</p>
+            <button class="btn btn-navy btn-explore" data-id="dolomites">
+              Explore More <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 dest-card-col reveal" data-name="Pyrenees" data-region="Europe">
+        <div class="destination-card">
+          <div class="destination-img-wrap">
+            <img src="https://images.unsplash.com/photo-1667743071531-9ff3ccf4fe38?q=80&w=800&auto=format&fit=crop" alt="Pyrenees mountains">
+          </div>
+          <div class="destination-info">
+            <h5>Pyrenees</h5>
+            <p class="destination-location"><i class="bi bi-geo-alt"></i> France / Spain</p>
+            <p>A dramatic natural border range with glacial lakes, waterfalls and traditional mountain villages.</p>
+            <button class="btn btn-navy btn-explore" data-id="pyrenees">
+              Explore More <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 dest-card-col reveal" data-name="Sierra Nevada" data-region="North America">
+        <div class="destination-card">
+          <div class="destination-img-wrap">
+            <img src="https://images.unsplash.com/photo-1576517606342-c4122f8de199?q=80&w=800&auto=format&fit=crop" alt="Sierra Nevada California">
+          </div>
+          <div class="destination-info">
+            <h5>Sierra Nevada</h5>
+            <p class="destination-location"><i class="bi bi-geo-alt"></i> California, USA</p>
+            <p>Home to Yosemite and Lake Tahoe, with towering granite peaks and giant sequoia forests.</p>
+            <button class="btn btn-navy btn-explore" data-id="sierranevada">
+              Explore More <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 dest-card-col reveal" data-name="Canadian Rockies" data-region="North America">
+        <div class="destination-card">
+          <div class="destination-img-wrap">
+            <img src="https://images.unsplash.com/photo-1539667547529-84c607280d20?q=80&w=800&auto=format&fit=crop" alt="Banff Canadian Rockies">
+          </div>
+          <div class="destination-info">
+            <h5>Canadian Rockies</h5>
+            <p class="destination-location"><i class="bi bi-geo-alt"></i> Alberta, Canada</p>
+            <p>Turquoise glacial lakes like Moraine and Louise surrounded by snow capped peaks in Banff National Park.</p>
+            <button class="btn btn-navy btn-explore" data-id="banff">
+              Explore More <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 dest-card-col reveal" data-name="Patagonia" data-region="South America">
+        <div class="destination-card">
+          <div class="destination-img-wrap">
+            <img src="https://images.unsplash.com/photo-1547483238-2cbf881a559f?q=80&w=800&auto=format&fit=crop" alt="Patagonia Argentina">
+          </div>
+          <div class="destination-info">
+            <h5>Patagonia</h5>
+            <p class="destination-location"><i class="bi bi-geo-alt"></i> Argentina / Chile</p>
+            <p>A vast wilderness of glaciers, granite spires and windswept steppe at the southern tip of South America.</p>
+            <button class="btn btn-navy btn-explore" data-id="patagonia">
+              Explore More <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4 dest-card-col reveal" data-name="Aconcagua" data-region="South America">
+        <div class="destination-card">
+          <div class="destination-img-wrap">
+            <img src="https://images.unsplash.com/photo-1662239090914-1da951eaeda4?q=80&w=800&auto=format&fit=crop" alt="Aconcagua Argentina">
+          </div>
+          <div class="destination-info">
+            <h5>Aconcagua</h5>
+            <p class="destination-location"><i class="bi bi-geo-alt"></i> Mendoza, Argentina</p>
+            <p>The highest peak in the Americas and one of the Seven Summits, rising above the Andes.</p>
+            <button class="btn btn-navy btn-explore" data-id="aconcagua">
+              Explore More <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="no-results text-center d-none" id="noResults">No destinations match your search.</p>
+  </div>
+</section>
+
+<div class="modal fade" id="destinationModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content dest-modal-content">
+      <div class="modal-header border-0">
+        <h5 class="modal-title" id="modalDestName">Destination</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="" alt="" id="modalDestImage" class="modal-dest-image">
+        <p class="modal-dest-location"><i class="bi bi-geo-alt"></i> <span id="modalDestLocation"></span></p>
+
+        <h6 class="modal-section-title">History</h6>
+        <p id="modalDestHistory"></p>
+
+        <h6 class="modal-section-title">Best Features</h6>
+        <ul id="modalDestFeatures" class="modal-list"></ul>
+
+        <h6 class="modal-section-title">Popular Activities</h6>
+        <ul id="modalDestActivities" class="modal-list"></ul>
+
+        <h6 class="modal-section-title">Best Time To Visit</h6>
+        <p id="modalDestBestTime"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="why-visit py-5">
+  <div class="container py-4">
+    <div class="text-center mb-5 reveal">
+      <p class="eyebrow justify-content-center">The Experience</p>
+      <h2 class="section-heading">Why Explore The Mountains?</h2>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="feature-card h-100">
+          <i class="bi bi-image feature-icon"></i>
+          <h5>Natural Beauty</h5>
+          <p>Experience breathtaking landscapes.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="feature-card h-100">
+          <i class="bi bi-compass feature-icon"></i>
+          <h5>Adventure</h5>
+          <p>Enjoy hiking, climbing and trekking.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="feature-card h-100">
+          <i class="bi bi-camera feature-icon"></i>
+          <h5>Amazing Views</h5>
+          <p>Capture unforgettable mountain moments.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="feature-card h-100">
+          <i class="bi bi-tree feature-icon"></i>
+          <h5>Nature And Wildlife</h5>
+          <p>Discover unique plants and wildlife.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="map-section py-5">
+  <div class="container py-4">
+    <div class="text-center mb-5 reveal">
+      <p class="eyebrow justify-content-center light-eyebrow">On The Map</p>
+      <h2 class="section-heading light-heading">Find Your Next Adventure</h2>
+    </div>
+
+    <div id="destinationsMap" class="destinations-leaflet-map reveal"></div>
+  </div>
+</section>
+
+<div class="modal fade" id="mapInfoModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content dest-modal-content">
+      <div class="modal-header border-0">
+        <h5 class="modal-title" id="mapModalTitle">Destination</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="ratio ratio-16x9 mb-3" id="mapModalVideoWrap">
+          <iframe id="mapModalVideo" src="" title="Destination video" allowfullscreen></iframe>
+        </div>
+
+        <p class="modal-dest-location"><i class="bi bi-signpost-2"></i> <span id="mapModalDistance">Calculating distance...</span></p>
+
+        <h6 class="modal-section-title">Safety Precautions</h6>
+        <ul id="mapSafetyList" class="modal-list"></ul>
+
+        <h6 class="modal-section-title">Essential Items To Carry</h6>
+        <ul id="mapEssentialsList" class="modal-list"></ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="travel-tip py-5">
+  <div class="container py-4">
+    <div class="text-center mb-5 reveal">
+      <p class="eyebrow justify-content-center">Get Ready</p>
+      <h2 class="section-heading">Before You Travel</h2>
+    </div>
+
+    <div class="row g-4 mb-4">
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="tip-card">
+          <i class="bi bi-cloud-sun tip-icon"></i>
+          <p>Check the weather</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="tip-card">
+          <i class="bi bi-backpack2 tip-icon"></i>
+          <p>Pack the right equipment</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="tip-card">
+          <i class="bi bi-shield-check tip-icon"></i>
+          <p>Follow safety rules</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="tip-card">
+          <i class="bi bi-tree tip-icon"></i>
+          <p>Respect nature</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center reveal">
+      <a href="safety.html#safetytips" class="btn btn-navy btn-explore">
+        View Safety Tips <i class="bi bi-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-overlay"></div>
+  <div class="container cta-content text-center reveal">
+    <h2 class="cta-heading">Your Mountain Adventure Awaits</h2>
+    <p class="cta-text">Choose your destination, pack your bags and get ready to explore.</p>
+    <a href="nearby.html#explore" class="btn btn-gold btn-hero">Start Your Journey</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6">
+        <a class="footer-brand" href="index.html">
+          <img src="assets/logo.png" alt="Alpine Astine" class="footer-logo">
+        </a>
+        <p class="footer-text mt-3">
+          Exploring mountains, creating memories and inspiring adventures.
+        </p>
+        <div class="social-icons mt-3">
+          <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+          <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-6">
+        <h5 class="footer-title">Quick Links</h5>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="history.html">History</a></li>
+          <li><a href="destinations.html">Destinations</a></li>
+          <li><a href="activities.html">Activities</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-6">
+        <h5 class="footer-title">Useful Links</h5>
+        <ul class="footer-links">
+          <li><a href="safety.html">Safety</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="safety.html#checklist">Travel Tips</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <h5 class="footer-title">Newsletter</h5>
+        <p class="footer-text">
+          Subscribe to get travel tips, exclusive offers and adventure inspiration.
+        </p>
+        <form id="newsletterForm" class="newsletter-form" novalidate>
+          <div class="input-group">
+            <input type="email" id="newsletterEmail" class="form-control" placeholder="Enter your email" aria-label="Email address" required>
+            <button class="btn btn-gold" type="submit">Subscribe</button>
+          </div>
+          <small id="newsletterMsg" class="d-block mt-2"></small>
+        </form>
+      </div>
+    </div>
+
+    <hr class="footer-divider">
+
+    <p class="text-center copyright mb-0">
+      &copy; <span id="currentYear"></span> Alpine Astine. All Rights Reserved.
+    </p>
+  </div>
+</footer>
+
+  <div class="compass-floating" id="compassFloating">
+    <span class="compass-floating-title">Find Your Way</span>
+    <div class="compass-face" id="compassFace">
+      <span class="compass-label compass-n">N</span>
+      <span class="compass-label compass-e">E</span>
+      <span class="compass-label compass-s">S</span>
+      <span class="compass-label compass-w">W</span>
+      <span class="compass-tick compass-ne"></span>
+      <span class="compass-tick compass-se"></span>
+      <span class="compass-tick compass-sw"></span>
+      <span class="compass-tick compass-nw"></span>
+      <div class="compass-needle" id="compassNeedle"></div>
+      <div class="compass-center-dot"></div>
+    </div>
+    <select id="compassDestinationSelect" class="compass-select">
+      <optgroup label="Pakistan">
+        <option value="karakoram">Karakoram</option>
+        <option value="hunza">Hunza Valley</option>
+        <option value="skardu">Skardu &amp; Deosai</option>
+        <option value="fairymeadows">Fairy Meadows</option>
+        <option value="swat">Swat Valley</option>
+        <option value="naran">Naran Kaghan</option>
+        <option value="chitral">Chitral &amp; Kalash</option>
+      </optgroup>
+      <optgroup label="Asia">
+        <option value="himalayas">Himalayas</option>
+        <option value="annapurna">Annapurna</option>
+        <option value="fuji">Mount Fuji</option>
+      </optgroup>
+      <optgroup label="Europe">
+        <option value="alps">The Alps</option>
+        <option value="dolomites">Dolomites</option>
+        <option value="pyrenees">Pyrenees</option>
+      </optgroup>
+      <optgroup label="North America">
+        <option value="rockies">Rockies</option>
+        <option value="sierranevada">Sierra Nevada</option>
+        <option value="banff">Canadian Rockies</option>
+      </optgroup>
+      <optgroup label="South America">
+        <option value="andes">Andes</option>
+        <option value="patagonia">Patagonia</option>
+        <option value="aconcagua">Aconcagua</option>
+      </optgroup>
+      <optgroup label="Africa">
+        <option value="atlas">Atlas Mountains</option>
+      </optgroup>
+    </select>
+    <button type="button" class="compass-enable-btn" id="enableDeviceCompass">
+      <i class="bi bi-compass"></i> Enable Device
+    </button>
+    <p class="compass-hint" id="compassHint">Locating you...</p>
+  </div>
+
+<button id="backToTop" aria-label="Back to top">
+  <i class="bi bi-chevron-up"></i>
+</button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="destination.js"></script>
+  <script src="sound-widget.js"></script>
+</body>
+</html>
