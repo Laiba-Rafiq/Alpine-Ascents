@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Alpine Astine</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="contact.css">
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg fixed-top" id="mainNavbar">
+    <div class="container">
+      <a class="navbar-brand" href="home.html">
+        <img src="assets/logo.png" alt="Alpine Astine" class="navbar-logo">
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+        aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="history.html">History</a></li>
+          <li class="nav-item"><a class="nav-link" href="destination.html">Destinations</a></li>
+          <li class="nav-item"><a class="nav-link" href="activities.html">Activities</a></li>
+          <li class="nav-item"><a class="nav-link" href="safety.html">Safety</a></li>
+          <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link" href="nearby.html">Explore Nearby</a></li>
+          <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+          <li class="nav-item">
+            <a class="nav-link search-icon" href="destination.html#findaplace" aria-label="Search"><i class="bi bi-search"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="contact-hero">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content text-center">
+      <p class="eyebrow-script fade-in-up">Get in Touch</p>
+      <div class="small-divider fade-in-up"><i class="bi bi-triangle-fill"></i></div>
+      <h1 class="hero-heading fade-in-up">Let's Start a
+        <span class="text-gold">Conversation</span>
+      </h1>
+      <p class="hero-text mx-auto fade-in-up">
+        Have a question, want to explore a destination, or simply want to share
+        your mountain experience? We would love to hear from you.
+      </p>
+    </div>
+  </header>
+
+  <div class="contact-content-wrap">
+
+  <section class="contact-info py-5">
+    <div class="container py-4">
+      <div class="row g-4">
+
+        <div class="col-md-4 reveal">
+          <div class="info-card h-100">
+            <div class="info-icon"><i class="bi bi-envelope"></i></div>
+            <h5>Email</h5>
+            <p><a href="mailto:hello@alpineastine.com">hello@alpineastine.com</a></p>
+          </div>
+        </div>
+
+        <div class="col-md-4 reveal">
+          <div class="info-card h-100">
+            <div class="info-icon"><i class="bi bi-telephone"></i></div>
+            <h5>Phone</h5>
+            <p><a href="tel:+923001234567">+92 300 1234567</a></p>
+          </div>
+        </div>
+
+        <div class="col-md-4 reveal">
+          <div class="info-card h-100">
+            <div class="info-icon"><i class="bi bi-clock"></i></div>
+            <h5>Working Hours</h5>
+            <p>Monday – Saturday<br>10:00 AM – 6:00 PM</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-form-section py-5">
+    <div class="container py-4">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 reveal">
+
+          <div class="text-center mb-5">
+            <p class="eyebrow justify-content-center">Reach Out</p>
+            <h2 class="section-heading">Send Us a Message</h2>
+          </div>
+
+          <div class="form-panel">
+            <form id="contactForm" class="contact-form" novalidate>
+              <div class="row g-4">
+
+                <div class="col-md-6">
+                  <label for="contactName" class="form-label">Full Name</label>
+                  <input type="text" class="form-control" id="contactName">
+                  <small class="form-error" id="contactNameError"></small>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="contactEmail" class="form-label">Email Address</label>
+                  <input type="email" class="form-control" id="contactEmail">
+                  <small class="form-error" id="contactEmailError"></small>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="contactPhone" class="form-label">Phone Number</label>
+                  <input type="text" class="form-control" id="contactPhone">
+                  <small class="form-error" id="contactPhoneError"></small>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="contactSubject" class="form-label">Subject</label>
+                  <input type="text" class="form-control" id="contactSubject">
+                  <small class="form-error" id="contactSubjectError"></small>
+                </div>
+
+                <div class="col-12">
+                  <label for="contactMessage" class="form-label">Message</label>
+                  <textarea class="form-control" id="contactMessage" rows="5"></textarea>
+                  <small class="form-error" id="contactMessageError"></small>
+                </div>
+
+                <div class="col-12 text-center">
+                  <button type="submit" class="btn btn-gold btn-hero">Send Message</button>
+                  <p class="contact-success-msg" id="contactSuccessMsg"></p>
+                </div>
+
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why-contact py-5">
+    <div class="container py-4">
+      <div class="text-center mb-5 reveal">
+        <p class="eyebrow justify-content-center">How We Help</p>
+        <h2 class="section-heading">We Are Here to Help</h2>
+      </div>
+
+      <div class="row g-4">
+
+        <div class="col-md-4 reveal">
+          <div class="feature-card h-100">
+            <i class="bi bi-map feature-icon"></i>
+            <h5>Plan Your Journey</h5>
+            <p>Get helpful information before exploring the mountains.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4 reveal">
+          <div class="feature-card h-100">
+            <i class="bi bi-geo-alt feature-icon"></i>
+            <h5>Explore Destinations</h5>
+            <p>Learn more about beautiful mountain destinations.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4 reveal">
+          <div class="feature-card h-100">
+            <i class="bi bi-camera feature-icon"></i>
+            <h5>Share Your Experience</h5>
+            <p>Tell us about your favorite mountain moments.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-section py-5">
+    <div class="container py-4">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+          <div class="text-center mb-5 reveal">
+            <p class="eyebrow justify-content-center">Common Questions</p>
+            <h2 class="section-heading">Frequently Asked Questions</h2>
+          </div>
+
+          <div class="accordion reveal" id="faqAccordion">
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqOne">
+                  What can I explore on Alpine Astine?
+                </button>
+              </h2>
+              <div id="faqOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Alpine Astine lets you explore mountain destinations, learn their
+                  history, discover activities and find useful safety information
+                  for your journey.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqTwo">
+                  Where can I find mountain destinations?
+                </button>
+              </h2>
+              <div id="faqTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Visit our Destinations page to browse mountain ranges and
+                  locations from around the world, each with a short overview.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqThree">
+                  What activities are available?
+                </button>
+              </h2>
+              <div id="faqThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Our Activities page covers hiking, mountain climbing, camping,
+                  skiing, trekking and mountain photography, with details for each.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqFour">
+                  How can I stay safe in the mountains?
+                </button>
+              </h2>
+              <div id="faqFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Check our Safety page for essential tips, a trip checklist and
+                  guidance for what to do before and during your journey.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqFive">
+                  Can I share my mountain experience?
+                </button>
+              </h2>
+              <div id="faqFive" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Yes, visit our Gallery page and use the Share Your Story option
+                  to tell us about your favorite mountain moment.
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="map-section py-5">
+    <div class="container py-4 reveal">
+      <div class="text-center mb-5">
+        <p class="eyebrow justify-content-center">Our Base</p>
+        <h2 class="section-heading">Find Alpine Astine</h2>
+      </div>
+
+      <div class="map-placeholder">
+        <div class="map-grid"></div>
+        <div class="map-pin">
+          <i class="bi bi-geo-alt-fill"></i>
+        </div>
+        <div class="map-caption">
+          <h4>ALPINE ASTINE</h4>
+          <p>Explore. Discover. Remember.</p>
+          <a href="https://www.openstreetmap.org/directions?to=24.938908,67.044917"
+             target="_blank" rel="noopener" class="map-directions-btn">
+            <i class="bi bi-signpost-2"></i> Get Directions
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </div>
+
+  <section class="quote-section">
+    <div class="quote-overlay"></div>
+    <div class="container quote-content text-center reveal">
+      <p class="quote-text">"The best journeys begin with a simple step."</p>
+      <p class="quote-sub">Start your next mountain adventure with Alpine Astine.</p>
+      <a href="destination.html" class="btn btn-gold btn-hero">Explore Destinations</a>
+    </div>
+  </section>
+
+  <footer class="site-footer" id="footer">
+    <div class="container py-5">
+      <div class="row g-4">
+
+        <div class="col-lg-4 col-md-6">
+          <a class="footer-brand" href="home.html">
+            <img src="assets/logo.png" alt="Alpine Astine" class="footer-logo">
+          </a>
+          <p class="footer-text mt-3">
+            Exploring mountains, creating memories and inspiring adventures for
+            travelers who seek the world's most breathtaking places.
+          </p>
+          <div class="social-icons mt-3">
+            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+            <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-6">
+          <h5 class="footer-title">Quick Links</h5>
+          <ul class="footer-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="history.html">History</a></li>
+            <li><a href="destination.html">Destinations</a></li>
+            <li><a href="activities.html">Activities</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-6">
+          <h5 class="footer-title">Useful Links</h5>
+          <ul class="footer-links">
+            <li><a href="safety.html">Safety</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="safety.html#checklist">Travel Tips</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <h5 class="footer-title">Newsletter</h5>
+          <p class="footer-text">
+            Subscribe to get travel tips, exclusive offers and adventure inspiration.
+          </p>
+          <form id="newsletterForm" class="newsletter-form" novalidate>
+            <div class="input-group">
+              <input type="email" id="newsletterEmail" class="form-control"
+                placeholder="Enter your email" aria-label="Email address" required>
+              <button class="btn btn-gold" type="submit">Subscribe</button>
+            </div>
+            <small id="newsletterMsg" class="d-block mt-2"></small>
+          </form>
+        </div>
+
+      </div>
+
+      <hr class="footer-divider">
+
+      <p class="text-center copyright mb-0">
+        &copy; <span id="currentYear"></span> Alpine Astine. All Rights Reserved.
+      </p>
+    </div>
+  </footer>
+
+  <div class="compass-floating" id="compassFloating">
+    <span class="compass-floating-title">Find Your Way</span>
+    <div class="compass-face" id="compassFace">
+      <span class="compass-label compass-n">N</span>
+      <span class="compass-label compass-e">E</span>
+      <span class="compass-label compass-s">S</span>
+      <span class="compass-label compass-w">W</span>
+      <span class="compass-tick compass-ne"></span>
+      <span class="compass-tick compass-se"></span>
+      <span class="compass-tick compass-sw"></span>
+      <span class="compass-tick compass-nw"></span>
+      <div class="compass-needle" id="compassNeedle"></div>
+      <div class="compass-center-dot"></div>
+    </div>
+    <select id="compassDestinationSelect" class="compass-select">
+      <optgroup label="Pakistan">
+        <option value="karakoram">Karakoram</option>
+        <option value="hunza">Hunza Valley</option>
+        <option value="skardu">Skardu &amp; Deosai</option>
+        <option value="fairymeadows">Fairy Meadows</option>
+        <option value="swat">Swat Valley</option>
+        <option value="naran">Naran Kaghan</option>
+        <option value="chitral">Chitral &amp; Kalash</option>
+      </optgroup>
+      <optgroup label="Asia">
+        <option value="himalayas">Himalayas</option>
+        <option value="annapurna">Annapurna</option>
+        <option value="fuji">Mount Fuji</option>
+      </optgroup>
+      <optgroup label="Europe">
+        <option value="alps">The Alps</option>
+        <option value="dolomites">Dolomites</option>
+        <option value="pyrenees">Pyrenees</option>
+      </optgroup>
+      <optgroup label="North America">
+        <option value="rockies">Rockies</option>
+        <option value="sierranevada">Sierra Nevada</option>
+        <option value="banff">Canadian Rockies</option>
+      </optgroup>
+      <optgroup label="South America">
+        <option value="andes">Andes</option>
+        <option value="patagonia">Patagonia</option>
+        <option value="aconcagua">Aconcagua</option>
+      </optgroup>
+      <optgroup label="Africa">
+        <option value="atlas">Atlas Mountains</option>
+      </optgroup>
+    </select>
+    <button type="button" class="compass-enable-btn" id="enableDeviceCompass">
+      <i class="bi bi-compass"></i> Enable Device
+    </button>
+    <p class="compass-hint" id="compassHint">Locating you...</p>
+  </div>
+
+  <button id="backToTop" aria-label="Back to top">
+    <i class="bi bi-chevron-up"></i>
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="contact.js"></script>
+  <script src="sound-widget.js"></script>
+</body>
+</html>
