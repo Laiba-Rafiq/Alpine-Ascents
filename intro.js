@@ -17,7 +17,7 @@ const SETTINGS = {
   ROTATE_SPEED: 0.0035,
   AUTO_ROTATE_SPEED: 0.0006,
   TRANSITION_DELAY_MS: 900,
-  REDIRECT_URL: "index.html",
+  REDIRECT_URL: "home.html",
   TERRAIN_SIZE: 90,
   TERRAIN_SEGMENTS: 220,  // higher = more detailed ridges, heavier on GPU
 
