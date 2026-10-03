@@ -1,1 +1,1 @@
-https://laiba-rafiq.github.io/Alpine-Ascents/home.html live link 
+https://laiba-rafiq.github.io/Alpine-Ascents/ live link 
